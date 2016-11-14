@@ -6,8 +6,8 @@
 
 void ftp_session()
 {
-	char str[NMAX] = "";
-	int t=0;
+	char str[NMAX+1] = "";
+	uint32_t t=0;
 	printf("Client connected.\n");
 	envoie(11, "Gros penis");
 	while(recoit(1, str))
@@ -19,15 +19,17 @@ void ftp_session()
 		break;
 		case 2:
 			printf("set\n");
-			t = recoit(1,str);
+			recoit(4, (char*) &t);
 			while(t>NMAX){
 				recoit(NMAX,str);
-				printf("%s",str[NMAX]);
+				str[NMAX+1]=0;
+				printf("%s",str);
 				t -= NMAX;
 			}
 			if(t!=0){
 				recoit(t, str);
-				printf("%s",str[t]);
+				str[t+1]=0;
+				printf("%s",str);
 			}
 		break;
 		case 3:
