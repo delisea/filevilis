@@ -1,9 +1,13 @@
 #include "reseau.h"
 #include <stdio.h>
+#include <stdint.h>
+
+#define NMAX 10;
 
 void ftp_session()
 {
-	char str[50] = "";
+	char str[NMAX] = "";
+	int t=0;
 	printf("Client connected.\n");
 	envoie(11, "Gros penis");
 	while(recoit(1, str))
@@ -15,6 +19,16 @@ void ftp_session()
 		break;
 		case 2:
 			printf("set\n");
+			t = recoit(1,str);
+			while(t>NMAX){
+				recoit(NMAX,str);
+				printf("%s",str[NMAX]);
+				t -= NMAX;
+			}
+			if(t!=0){
+				recoit(t, str);
+				printf("%s",str[t]);
+			}
 		break;
 		case 3:
 			printf("ls\n");
