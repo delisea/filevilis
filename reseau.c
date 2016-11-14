@@ -12,6 +12,9 @@
 
 #include <stdint.h>
 
+#include <sys/stat.h>
+
+#include <sys/sendfile.h>
 
 char _buffer[SO_BUFFER_SIZE];
 int _SO_length = 0;
@@ -155,12 +158,14 @@ void envoie(int t, char *v)
 */
 void envoief(int file)
 {
+	printf("1\n");
   struct stat fileStat;
   uint32_t size;
   if(fstat(file,&fileStat) < 0)    
     return ;
   size = fileStat.st_size;
   envoie(4,(char*)&size);
+  	printf("%i\n",(int) size);
   sendfile(sock, file, NULL, (int) size);
 }
 

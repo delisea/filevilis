@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdint.h>
 
-#define NMAX 10;
+#define NMAX 10
 
 void ftp_session()
 {

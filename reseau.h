@@ -41,6 +41,7 @@ void disconnect();
 */
 void envoiec(char t);
 
+void envoief(int t);
 
 /** void envoie(int t, char *v)
 *	Envoie une chaine de caractère sur la connexion courante

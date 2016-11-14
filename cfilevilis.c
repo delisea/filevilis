@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <fcntl.h>
 
 int main()
 {
@@ -20,8 +21,11 @@ int main()
 		scanf("%s", str);
 		if(!strcmp("get", str))
 			 c = 1;
-		else if(!strcmp("set", str))
-			 c = 2;
+		else if(!strcmp("set", str)){
+			c = 2;
+			int f = open("../Makefile",O_RDONLY);
+			envoief(f);
+			}
 		else if(!strcmp("ls", str))
 			 c = 3;
 		else if(!strcmp("quit", str))
