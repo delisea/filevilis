@@ -10,6 +10,8 @@
 // Lib pour rendre les flux non bloquant
 #include <fcntl.h>
 
+#include <stdint.h>
+
 
 char _buffer[SO_BUFFER_SIZE];
 int _SO_length = 0;
@@ -144,6 +146,22 @@ void envoiec(char t)
 void envoie(int t, char *v)
 {
 	h_writes(sock, v, t);
+}
+
+/** void envoie(int t, char *v)
+*	Envoie une chaine de caractère sur la connexion courante
+*	Précondition: la connexion à été initialisé à l'aide de init_connexion
+*	et démarré à l'aide d'un connect
+*/
+void envoief(int file)
+{
+  struct stat fileStat;
+  uint32_t size;
+  if(fstat(file,&fileStat) < 0)    
+    return ;
+  size = fileStat.st_size;
+  envoie(4,(char*)&size);
+  sendfile(sock, file, NULL, (int) size);
 }
 
 /** void recoitc(char *t)
