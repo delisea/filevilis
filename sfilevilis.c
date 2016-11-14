@@ -27,7 +27,10 @@ void ftp_session()
 
 int main()
 {
-	init_connexion("127.0.0.1");
+	char ip[20] = "";
+	printf("ip?\n");
+	scanf("%s", ip);
+	init_connexion(ip);
 	host_connect(&ftp_session);
 	return 0;
 }

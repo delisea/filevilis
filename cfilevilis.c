@@ -5,7 +5,10 @@
 
 int main()
 {
-	init_connexion("127.0.0.1");
+	char ip[20] = "";
+	printf("ip?\n");
+	scanf("%s", ip);
+	init_connexion(ip);
 	client_connect();
 	printf("perhaps connected\n");
 	char str[50] = "";
